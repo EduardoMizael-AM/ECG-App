@@ -3,30 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#12372d">
+  <meta name="theme-color" content="#f5f7fa">
   <meta name="description" content="Monitor educativo de ECG con conexión BLE al ESP32 y modo de demostración.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="enhancements.css">
   <link rel="stylesheet" href="learning.css">
-  <link rel="stylesheet" href="ecgenius-theme.css">
+  <link rel="stylesheet" href="ecgenius-replica.css">
   <title>CardioLab · Monitor ECG</title>
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
       <a class="brand" href="#monitor" aria-label="CardioLab, monitor">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><strong>CardioLab</strong><small>ECG · APRENDIZAJE</small></span>
+        <span class="brand-mark" aria-hidden="true"><span></span><i></i></span><span>Cardio<span>Lab</span></span>
       </a>
       <button id="installBtn" class="icon-button install-button" hidden aria-label="Instalar aplicación" title="Instalar aplicación">↓</button>
       <div class="connection-pill" id="connectionPill"><span class="status-dot"></span><span id="connectionText">Sin conectar</span></div>
+      <button id="menuBtn" class="icon-button menu-button" type="button" aria-label="Abrir navegación" aria-expanded="false"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </header>
 
     <main>
-      <section id="view-monitor" class="view active" aria-labelledby="monitorTitle">
+      <section id="view-monitor" class="view view-monitor active" aria-labelledby="monitorTitle">
         <div class="page-heading">
           <div><p class="eyebrow">PANEL DE MONITORIZACIÓN</p><h1 id="monitorTitle">Tu señal, en vivo</h1><p class="muted">Conecta el ESP32 o explora el modo de demostración.</p></div>
+          <img class="monitor-doctor" src="assets/assets/characters/doctor-01/presenting.svg" alt="Doctora guía ECG" loading="lazy">
           <div class="connection-actions"><button class="button button-primary connect-action" id="connectBtn"><span aria-hidden="true">↻</span> Conexión rápida</button><button class="button button-outline connect-action" id="manualConnectBtn"><span aria-hidden="true">⌁</span> Elegir dispositivo</button></div>
         </div>
         <div id="notice" class="notice" role="status" aria-live="polite"><span class="notice-icon">i</span><span id="noticeText">La interpretación es experimental y no sustituye una evaluación profesional.</span><button id="noticeClose" aria-label="Cerrar aviso">×</button></div>
@@ -103,9 +105,20 @@
       </section>
     </main>
 
-    <nav class="bottom-nav" aria-label="Navegación principal">
-      <a href="#monitor" data-view="monitor" class="nav-item active"><span>⌁</span><small>Monitor</small></a><a href="#learn" data-view="learn" class="nav-item"><span>✦</span><small>Aprender</small></a><a href="#library" data-view="library" class="nav-item"><span>▣</span><small>Ritmos</small></a><a href="#challenge" data-view="challenge" class="nav-item"><span>★</span><small>Reto</small></a><a href="#history" data-view="history" class="nav-item"><span>▤</span><small>Capturas</small></a><a href="#guide" data-view="guide" class="nav-item"><span>ⓘ</span><small>Guía</small></a><a href="#settings" data-view="settings" class="nav-item"><span>⚙</span><small>Ajustes</small></a>
-    </nav>
+    <button id="drawerBackdrop" class="drawer-backdrop" type="button" aria-label="Cerrar navegación" hidden></button>
+    <aside id="appSidebar" class="app-sidebar" aria-label="Navegación principal">
+      <div class="sidebar-top"><a class="brand" href="#monitor" aria-label="CardioLab, monitor"><span class="brand-mark" aria-hidden="true"><span></span><i></i></span><span>Cardio<span>Lab</span></span></a><button id="drawerClose" class="icon-button drawer-close" type="button" aria-label="Cerrar navegación">×</button></div>
+      <nav>
+        <a href="#learn" data-view="learn" class="nav-item"><span class="nav-icon learn"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span><small>Aprender</small></a>
+        <a href="#library" data-view="library" class="nav-item"><span class="nav-icon practice"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16M8 3v4M16 10v4M10 17v4"/></svg></span><small>Ritmos</small></a>
+        <a href="#monitor" data-view="monitor" class="nav-item active"><span class="nav-icon predict"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><small>Monitor ECG</small></a>
+        <a href="#challenge" data-view="challenge" class="nav-item"><span class="nav-icon challenge"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4ZM7 6H4v2a4 4 0 0 0 4 4M17 6h3v2a4 4 0 0 1-4 4"/></svg></span><small>Reto</small></a>
+        <a href="#history" data-view="history" class="nav-item"><span class="nav-icon guide"><svg viewBox="0 0 24 24"><path d="M7 3h10v18l-5-3-5 3V3Z"/><path d="M9.5 8h5M9.5 12h5"/></svg></span><small>Capturas</small></a>
+        <a href="#guide" data-view="guide" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><small>Guía ECG</small></a>
+        <a href="#settings" data-view="settings" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.5.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.5-.9l-1.7.7-1.4-2.4 1.4-1.1a8 8 0 0 1 0-1.8l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.5-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.5.9l1.7-.7 1.4 2.4-1.4 1.1a8 8 0 0 1 0 1.8Z"/></svg></span><small>Ajustes</small></a>
+      </nav>
+      <div class="sidebar-footer"><button id="sidebarThemeToggle" class="theme-toggle" type="button"><span class="theme-symbol">◐</span><span>Modo nocturno</span></button><p>Observa la señal.<br>Aprende el ritmo.</p><div class="sidebar-connection"><span class="status-dot"></span><span id="sidebarConnectionText">Sin conectar</span></div></div>
+    </aside>
     <footer class="desktop-footer"><span>CardioLab · Prototipo educativo</span><span>Sin fines de diagnóstico clínico</span></footer>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
