@@ -30,7 +30,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p dist
-          cp index.html app.js learning-experience.js classifier-engine.js styles.css enhancements.css learning.css manifest.webmanifest icon.svg sw.js dist/
+          cp index.html app.js learning-experience.js classifier-engine.js styles.css enhancements.css learning.css ecgenius-theme.css manifest.webmanifest icon.svg sw.js dist/
           cp -R assets dist/assets
 
       - name: Upload Pages artifact
