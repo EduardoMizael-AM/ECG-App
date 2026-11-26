@@ -8,6 +8,9 @@ Prototipo educativo de aplicación web progresiva (PWA) para visualizar una señ
 - El modo demo genera una señal sintética de ritmo sinusal para probar la interfaz. No representa una señal recibida del ProSim ni del ESP32.
 - BLE se implementa mediante Web Bluetooth, disponible principalmente en navegadores basados en Chromium de Android y en contexto seguro (HTTPS). “Elegir dispositivo” autoriza el primer enlace; “Conexión rápida” intenta reconectar un dispositivo ya autorizado. Esta versión no incluye un contenedor nativo BLE para iOS/Android.
 - El JSON `pathologies_with_classifier` aporta fichas y un comparador de reglas educativas para 27 ritmos. La app muestra definiciones/características y calcula coincidencias con los rasgos que el usuario selecciona; solo estima la frecuencia en vivo. No extrae automáticamente ondas P, PR, ancho QRS, marcapasos ni conducción. Los puntos de coincidencia no son probabilidades y no son diagnósticos. El archivo JSON de la interfaz excluye tratamientos y recomendaciones clínicas.
+- La ruta **Aprender** organiza las 27 fichas en seis módulos y conserva el avance en el teléfono. Cada lección incluye hallazgos, puntos clave y una pregunta educativa de reconocimiento.
+- **Ritmos** ahora permite buscar por nombre, abreviatura o definición, filtrar por módulo, consultar la ficha y abrir el video educativo.
+- **Reto** crea una sesión local de 15 casos en tres turnos, con personajes y fondos del proyecto, opciones aleatorias, puntuación y progreso guardado. Los trazados son videos educativos; no son señales del ESP32 ni pacientes reales.
 
 ## Abrir y probar en computadora
 
@@ -19,7 +22,7 @@ Para usar el modo PWA y probar Bluetooth desde el mismo computador, sirve la car
 node server.mjs
 ```
 
-Luego abre `http://localhost:8000`. El botón **Iniciar demo** dibuja una señal sintética. La Biblioteca contiene los videos de los recursos originales.
+Luego abre `http://localhost:8000`. El botón **Iniciar demo** dibuja una señal sintética. Desde **Aprender**, **Ritmos** y **Reto** puedes recorrer las fichas, videos y casos educativos.
 
 En Windows también puedes abrir `Abrir CardioLab.bat`; iniciará el servidor y abrirá la página en el navegador. Deja abierta la ventana del servidor mientras usas la app.
 
@@ -89,3 +92,5 @@ Las capturas demo se marcan como simulación y no deben mezclarse con datos de h
 - Fichas y reglas seleccionadas de `assets/data/rhythm-guides.json`, derivadas del JSON compartido. El JSON local omite tratamiento y recomendaciones clínicas.
 - Fondo `assets/assets/challenge-backgrounds/ward1.png` como póster del video.
 - Paleta verde/turquesa de alto contraste y modo nocturno.
+- Doctores y personajes de paciente reutilizados en lecciones y casos educativos.
+

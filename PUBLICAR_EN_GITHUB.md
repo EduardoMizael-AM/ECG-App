@@ -55,6 +55,7 @@ Cada push a `main` dispara un nuevo despliegue. Para actualizar los recursos que
 ## Qué se publica y qué no
 
 - El workflow publica `index.html`, CSS, JavaScript, el manifiesto, el icono y `assets/`.
+- Incluye `learning.css` y `learning-experience.js` para las áreas de aprendizaje, consulta y reto.
 - No publica `server.mjs`, el lanzador `.bat`, `README.md` ni este instructivo en el sitio.
 - `.gitignore` excluye CSV, carpetas de capturas y archivos `.env`; verifica `git status` antes de cada subida.
 - Las fichas del JSON del proyecto quedan accesibles públicamente en el sitio. La app no envía a GitHub las capturas ni los datos guardados en el teléfono.

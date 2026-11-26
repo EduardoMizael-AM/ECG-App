@@ -9,6 +9,7 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="enhancements.css">
+  <link rel="stylesheet" href="learning.css">
   <title>CardioLab · Monitor ECG</title>
 </head>
 <body>
@@ -58,7 +59,22 @@
       <section id="view-library" class="view" aria-labelledby="libraryTitle">
         <div class="page-heading"><div><p class="eyebrow">APRENDE CON SIMULACIONES</p><h1 id="libraryTitle">Biblioteca de ritmos</h1><p class="muted">Videos educativos incluidos en los recursos del proyecto.</p></div><span class="count-chip">27 simulaciones</span></div>
         <div class="library-note"><span>▶</span><p>Estos videos son <strong>simulaciones educativas</strong>. No son señales recibidas por Bluetooth ni datos clínicos para entrenar una IA.</p></div>
+        <div class="practice-toolbar card"><label>Buscar un ritmo<input id="rhythmSearch" type="search" placeholder="Nombre, abreviatura o término…"></label><label>Filtrar por módulo<select id="rhythmModuleFilter"><option value="">Todos los módulos</option></select></label><span id="rhythmFilterCount" class="muted">27 ritmos</span></div>
         <div class="video-layout"><div class="video-card card"><video id="educationVideo" controls playsinline preload="metadata" poster="assets/assets/challenge-backgrounds/ward1.png"></video><div class="video-caption"><div><p class="eyebrow">SIMULACIÓN EDUCATIVA</p><h2 id="videoTitle">Selecciona un ritmo</h2></div><span class="video-chip">DEMO</span></div><div id="videoInfo" class="rhythm-info"><div class="info-guide"><img id="infoDoctor" src="assets/assets/characters/doctor-01/default.svg" alt="Doctora guía"><div><small>GUÍA DE RITMO</small><p>Selecciona un ritmo para ver su descripción y características educativas.</p></div></div></div></div><div class="rhythm-list card" id="rhythmList" aria-label="Lista de ritmos"></div></div>
+      </section>
+
+      <section id="view-learn" class="view" aria-labelledby="learnTitle">
+        <div class="page-heading"><div><p class="eyebrow">RUTA EDUCATIVA · 27 PATRONES</p><h1 id="learnTitle">Aprender por etapas</h1><p class="muted">Avanza por módulos, estudia los hallazgos y practica el reconocimiento.</p></div><span class="count-chip" id="learningProgressLabel">0 de 27 lecciones</span></div>
+        <div class="learning-hero card"><img src="assets/assets/characters/doctor-02/presenting.svg" alt="Doctor guía"><div><span class="eyebrow">TU RUTA ECG</span><h2>Un ritmo a la vez</h2><p>Lecciones cortas creadas a partir de la guía educativa del proyecto. Tu progreso se guarda en este dispositivo.</p><div class="learning-progress-track"><span id="learningProgressBar"></span></div></div></div>
+        <div id="learningLesson" class="learning-lesson" hidden></div>
+        <div id="learningModules" class="learning-modules"></div>
+        <div class="disclaimer"><span>ⓘ</span><p><strong>Uso educativo.</strong> Los cuestionarios ayudan a repasar descripciones de ritmos; no interpretan ECG ni validan diagnósticos clínicos.</p></div>
+      </section>
+
+      <section id="view-challenge" class="view" aria-labelledby="challengeTitle">
+        <div class="page-heading"><div><p class="eyebrow">RETO DE RECONOCIMIENTO</p><h1 id="challengeTitle">Turno de ECG</h1><p class="muted">Resuelve casos educativos, gana puntos y completa tres turnos de cinco pacientes.</p></div><span class="count-chip" id="challengeScore">0 puntos · ♥♥♥♥♥</span></div>
+        <div id="challengeRoot"></div>
+        <div class="disclaimer"><span>ⓘ</span><p><strong>Simulación educativa.</strong> Los videos y casos no son pacientes ni señales clínicas. Este reto no prescribe tratamientos ni sustituye protocolos de atención.</p></div>
       </section>
 
       <section id="view-history" class="view" aria-labelledby="historyTitle">
@@ -87,13 +103,15 @@
     </main>
 
     <nav class="bottom-nav" aria-label="Navegación principal">
-      <a href="#monitor" data-view="monitor" class="nav-item active"><span>⌁</span><small>Monitor</small></a><a href="#library" data-view="library" class="nav-item"><span>▣</span><small>Ritmos</small></a><a href="#history" data-view="history" class="nav-item"><span>▤</span><small>Capturas</small></a><a href="#guide" data-view="guide" class="nav-item"><span>ⓘ</span><small>Guía</small></a><a href="#settings" data-view="settings" class="nav-item"><span>⚙</span><small>Ajustes</small></a>
+      <a href="#monitor" data-view="monitor" class="nav-item active"><span>⌁</span><small>Monitor</small></a><a href="#learn" data-view="learn" class="nav-item"><span>✦</span><small>Aprender</small></a><a href="#library" data-view="library" class="nav-item"><span>▣</span><small>Ritmos</small></a><a href="#challenge" data-view="challenge" class="nav-item"><span>★</span><small>Reto</small></a><a href="#history" data-view="history" class="nav-item"><span>▤</span><small>Capturas</small></a><a href="#guide" data-view="guide" class="nav-item"><span>ⓘ</span><small>Guía</small></a><a href="#settings" data-view="settings" class="nav-item"><span>⚙</span><small>Ajustes</small></a>
     </nav>
     <footer class="desktop-footer"><span>CardioLab · Prototipo educativo</span><span>Sin fines de diagnóstico clínico</span></footer>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="assets/data/rhythm-guides.js" defer></script>
   <script src="classifier-engine.js" defer></script>
+  <script src="learning-experience.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>
+
